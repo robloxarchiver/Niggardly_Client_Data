@@ -20,7 +20,6 @@
 --]]
 
 getgenv().finity = {}
-local finity = getgenv().finity
 finity.gs = {}
 
 local PROTECT_NAME = game:GetService("HttpService"):GenerateGUID(false)
