@@ -18,24 +18,31 @@
 	Docs:
 		https://detourious.gitbook.io/project-finity/
 --]]
-
 getgenv().finity = {}
 finity.gs = {}
+
+pcall(
+    function()
+        if getgenv().finity then
+            return
+        end
+    end
+)
 
 local PROTECT_NAME = game:GetService("HttpService"):GenerateGUID(false)
 
 finity.theme = {
-    -- I'll fix this eventually, still uses Purge colors.
+    -- light // purge theme // unused now
     main_container = Color3.fromRGB(25, 25, 25),
     separator_color = Color3.fromRGB(0, 255, 255),
     text_color = Color3.fromRGB(251, 248, 253), -- softer color
     category_button_background = Color3.fromRGB(21, 23, 30),
     category_button_border = Color3.fromRGB(0, 0, 0),
-    checkbox_checked = Color3.fromRGB(255, 104, 71),
+    checkbox_checked = Color3.fromRGB(0, 255, 255),
     checkbox_outer = Color3.fromRGB(0, 0, 0),
     checkbox_inner = Color3.fromRGB(32, 33, 42),
-    slider_color = Color3.fromRGB(255, 104, 71),
-    slider_color_sliding = Color3.fromRGB(255, 104, 71),
+    slider_color = Color3.fromRGB(0, 255, 255),
+    slider_color_sliding = Color3.fromRGB(0, 255, 255),
     slider_background = Color3.fromRGB(42, 33, 42),
     slider_text = Color3.fromRGB(251, 248, 253),
     textbox_background = Color3.fromRGB(42, 33, 42),
@@ -56,15 +63,15 @@ finity.theme = {
 finity.dark_theme = {
     -- dark
     main_container = Color3.fromRGB(32, 32, 33),
-    separator_color = Color3.fromRGB(63, 63, 65),
+    separator_color = Color3.fromRGB(255, 0, 0),
     text_color = Color3.fromRGB(206, 206, 206),
     category_button_background = Color3.fromRGB(63, 62, 65),
     category_button_border = Color3.fromRGB(72, 71, 74),
-    checkbox_checked = Color3.fromRGB(132, 255, 130),
+    checkbox_checked = Color3.fromRGB(255, 0, 0),
     checkbox_outer = Color3.fromRGB(84, 81, 86),
     checkbox_inner = Color3.fromRGB(132, 132, 136),
-    slider_color = Color3.fromRGB(177, 177, 177),
-    slider_color_sliding = Color3.fromRGB(132, 255, 130),
+    slider_color = Color3.fromRGB(255, 0, 0),
+    slider_color_sliding = Color3.fromRGB(255, 0, 0),
     slider_background = Color3.fromRGB(88, 84, 90),
     slider_text = Color3.fromRGB(177, 177, 177),
     textbox_background = Color3.fromRGB(103, 103, 106),
@@ -2132,3 +2139,5 @@ function finity.new(isdark, gprojectName, thinProject)
 
     return self2, finityData
 end
+
+return finity
