@@ -19,7 +19,7 @@
 		https://detourious.gitbook.io/project-finity/
 --]]
 
-getgenv.finity = {}
+getgenv().finity = {}
 local finity = getgenv().finity
 finity.gs = {}
 
