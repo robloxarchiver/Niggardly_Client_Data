@@ -18,7 +18,9 @@
 	Docs:
 		https://detourious.gitbook.io/project-finity/
 --]]
-local finity = {}
+
+getgenv.finity = {}
+local finity = getgenv().finity
 finity.gs = {}
 
 local PROTECT_NAME = game:GetService("HttpService"):GenerateGUID(false)
@@ -2131,5 +2133,3 @@ function finity.new(isdark, gprojectName, thinProject)
 
     return self2, finityData
 end
-
-return finity
