@@ -143,25 +143,24 @@ function finity:addShadow(object, transparency)
 	shadow.Parent = object
 end
 
-function finity.new(isdark, gprojectName, thinProject)
+function finity.new(gprojectName, isdark, thinMenu)
 	local finityObject = {}
 	local self2 = finityObject
 	local self = finity
 
 	local theme = finity.theme
 	local projectName = false
-	local thinMenu = false
+	local thinProject = false
 	
 	if isdark == true then theme = finity.dark_theme end
 	if gprojectName then projectName = gprojectName end
-	if thinProject then thinMenu = thinProject end
+	if thinMenu then thinProject = thinMenu end
 	
 	local toggled = true
 	local typing = false
 	local firstCategory = true
     local savedposition = UDim2.new(0.5, 0, 0.5, 0)
     
-
 	local finityData
 	finityData = {
 		UpConnection = nil,
@@ -299,7 +298,7 @@ function finity.new(isdark, gprojectName, thinProject)
 		self2.tip.Text = "Press '".. string.sub(tostring(self.ToggleKey), 14) .."' to hide this menu"
 	end
 
-    function finity:SetTitle(text)
+    function self2:SetName(text)
         self2.tip.Text = tostring(text)
     end
 
@@ -367,7 +366,7 @@ function finity.new(isdark, gprojectName, thinProject)
 			TextSize = 14
 		})
 
-		function self2:Rename(name)
+		function category:SetName(name)
 			category.button.Name = tostring(name)
 		end
 
