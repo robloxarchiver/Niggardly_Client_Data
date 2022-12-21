@@ -298,7 +298,7 @@ function finity.new(isdark, gprojectName, thinMenu)
 		self2.tip.Text = "Press '".. string.sub(tostring(self.ToggleKey), 14) .."' to hide this menu"
 	end
 
-    function self2:SetName(text)
+    function self2.SetName(text)
         self2.tip.Text = tostring(text)
     end
 
@@ -365,10 +365,6 @@ function finity.new(isdark, gprojectName, thinMenu)
 			TextColor3 = theme.text_color,
 			TextSize = 14
 		})
-
-		function category:SetName(name)
-			category.button.Text = tostring(name)
-		end
 
 		category.container = finity:Create("ScrollingFrame", {
 			Name = name,
@@ -501,6 +497,10 @@ function finity.new(isdark, gprojectName, thinMenu)
 			else
 				return "L"
 			end
+		end
+
+		function category.SetName(name)
+			category.button.Text = tostring(name)
 		end
 
 		function category:Sector(name)
