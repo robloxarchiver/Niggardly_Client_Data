@@ -366,7 +366,7 @@ function finity.new(isdark, gprojectName, thinMenu)
 			TextSize = 14
 		})
 
-		function self2:SetName(name)
+		function category:SetName(name)
 			category.button.Text = tostring(name)
 		end
 
