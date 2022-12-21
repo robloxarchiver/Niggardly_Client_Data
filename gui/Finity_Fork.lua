@@ -679,10 +679,15 @@ function finity.new(isdark, gprojectName, thinMenu)
 							end
 						end)
 
-						function cheat:Update(bool)
-							cheat.value = bool
+						function cheat:SetValue(value)
+							cheat.value = value
 
-							finity.gs["TweenService"]:Create(cheat.checkboxbutton, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_outer}):Play()
+                            if cheat.value then
+                                finity.gs["TweenService"]:Create(cheat.outerbox, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_checked}):Play()
+                            else
+                                finity.gs["TweenService"]:Create(cheat.outerbox, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_outer}):Play()
+                                finity.gs["TweenService"]:Create(cheat.checkboxbutton, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_inner}):Play()
+                            end
 						end
 
 						cheat.checkboxbutton.Parent = cheat.outerbox
