@@ -143,7 +143,7 @@ function finity:addShadow(object, transparency)
 	shadow.Parent = object
 end
 
-function finity.new(gprojectName, isdark, thinMenu)
+function finity.new(isdark, gprojectName, thinMenu)
 	local finityObject = {}
 	local self2 = finityObject
 	local self = finity
@@ -366,8 +366,8 @@ function finity.new(gprojectName, isdark, thinMenu)
 			TextSize = 14
 		})
 
-		function category:SetName(name)
-			category.button.Name = tostring(name)
+		function self2:SetName(name)
+			category.button.Text = tostring(name)
 		end
 
 		category.container = finity:Create("ScrollingFrame", {
