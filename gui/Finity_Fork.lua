@@ -1499,6 +1499,10 @@ function finity.new(isdark, gprojectName, thinMenu)
 					end
 				end
 
+				function cheat:SetValue(text)
+					cheat.label.Text = tostring(text)
+				end
+
 				cheat.frame.Parent = sector.container
 				cheat.label.Parent = cheat.frame
 				cheat.container.Parent = cheat.frame
