@@ -643,6 +643,7 @@ function finity.new(isdark, gprojectName, thinMenu)
 							local lightertheme = Color3.fromRGB((theme.checkbox_outer.R * 255) + 20, (theme.checkbox_outer.G * 255) + 20, (theme.checkbox_outer.B * 255) + 20)
 							finity.gs["TweenService"]:Create(cheat.outerbox, TweenInfo.new(0.2), {ImageColor3 = lightertheme}):Play()
 						end)
+
 						cheat.checkboxbutton.MouseLeave:Connect(function()
 							if not cheat.value then
 								finity.gs["TweenService"]:Create(cheat.outerbox, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_outer}):Play()
@@ -650,6 +651,7 @@ function finity.new(isdark, gprojectName, thinMenu)
 								finity.gs["TweenService"]:Create(cheat.outerbox, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_checked}):Play()
 							end
 						end)
+
 						cheat.checkboxbutton.MouseButton1Down:Connect(function()
 							if cheat.value then
 								finity.gs["TweenService"]:Create(cheat.checkboxbutton, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_outer}):Play()
@@ -657,6 +659,7 @@ function finity.new(isdark, gprojectName, thinMenu)
 								finity.gs["TweenService"]:Create(cheat.checkboxbutton, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_checked}):Play()
 							end
 						end)
+
 						cheat.checkboxbutton.MouseButton1Up:Connect(function()
 							cheat.value = not cheat.value
 
@@ -675,6 +678,12 @@ function finity.new(isdark, gprojectName, thinMenu)
 								finity.gs["TweenService"]:Create(cheat.checkboxbutton, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_inner}):Play()
 							end
 						end)
+
+						function cheat:Disable()
+                            cheat.value = false
+
+							finity.gs["TweenService"]:Create(cheat.checkboxbutton, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_outer}):Play()
+						end
 
 						cheat.checkboxbutton.Parent = cheat.outerbox
                         cheat.outerbox.Parent = cheat.container
