@@ -679,8 +679,8 @@ function finity.new(isdark, gprojectName, thinMenu)
 							end
 						end)
 
-						function cheat:Disable()
-                            cheat.value = false
+						function cheat:Update(bool)
+							cheat.value = bool
 
 							finity.gs["TweenService"]:Create(cheat.checkboxbutton, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_outer}):Play()
 						end
@@ -1053,14 +1053,17 @@ function finity.new(isdark, gprojectName, thinMenu)
 						cheat.background.MouseEnter:Connect(function()
 							finity.gs["TweenService"]:Create(cheat.textbox, TweenInfo.new(0.1), {TextColor3 = theme.textbox_text_hover}):Play()
 						end)
+
 						cheat.background.MouseLeave:Connect(function()
 							finity.gs["TweenService"]:Create(cheat.textbox, TweenInfo.new(0.1), {TextColor3 = theme.textbox_text}):Play()
 						end)
+
 						cheat.textbox.Focused:Connect(function()
 							typing = true
 
 							finity.gs["TweenService"]:Create(cheat.background, TweenInfo.new(0.2), {ImageColor3 = theme.textbox_background_hover}):Play()
 						end)
+
 						cheat.textbox.FocusLost:Connect(function()
 							typing = false
 
@@ -1077,6 +1080,7 @@ function finity.new(isdark, gprojectName, thinMenu)
 								if not s then warn("error: "..e) end
                             end
                         end)
+
                         function cheat:SetValue(value)
                             cheat.value = tostring(value)
                             cheat.textbox.Text = tostring(value)
