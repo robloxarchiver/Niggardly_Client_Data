@@ -1499,7 +1499,7 @@ function finity.new(isdark, gprojectName, thinMenu)
 					end
 				end
 
-				function cheat:SetValue(text)
+				function cheat:ChangeText(text)
 					cheat.label.Text = tostring(text)
 				end
 
