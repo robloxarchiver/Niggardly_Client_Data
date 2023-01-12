@@ -1,15 +1,20 @@
 return {
     version = "v0.1.5",
     support = "Univsersal",
-    changelogs = {},
+    status = "Private",
+    changelogs = {
+        "+ Added client file",
+        "+ Automatic grabbing of changelogs and status of features",
+        "+ Carfucker Fixed",
+        "+ General Optimizations (Invis was laggy on lowend PC's)"
+    },
     features = {
-        "Invisiblity",
-        "Carfucker"
+        ["Invisibility"] = true,
+        ["Carfucker"] = true
     },
     LookFor = {
         rnet = function() if getgenv().rnet then return true else return false end end,
         debugsetcode = function() if getgenv().debug.setcode then return true else return false end end,
-        debuggetcode = function() if getgenv().debug.getcode then return true else return false end end,
-        sendphysics = function() if getgenv().rnet.sendphysics then return true else return false end end
+        debuggetcode = function() if getgenv().debug.getcode then return true else return false end end
     }
 }
