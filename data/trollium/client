@@ -1,16 +1,14 @@
 return {
-    version = "v0.1.5",
+    version = "v0.1.6",
     support = "Univsersal",
     status = "Private",
     changelogs = {
-        "+ Added client file",
-        "+ Automatic grabbing of changelogs and status of features",
-        "+ Carfucker Fixed",
-        "+ General Optimizations (Invis was laggy on lowend PC's)"
+        "- Removed CarFucker Connection",
+        "+ Fixing Carfucker"
     },
     features = {
         ["Invisibility"] = true,
-        ["Carfucker"] = true
+        ["Carfucker"] = false
     },
     LookFor = {
         rnet = function() if getgenv().rnet then return true else return false end end,
