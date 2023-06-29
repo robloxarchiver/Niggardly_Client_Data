@@ -894,7 +894,7 @@ function finity.new(isdark, gprojectName, thinMenu)
 								cheat.fadelist()
 							end	
 							
-							for _, child in next, cheat.list:GetChildren() do
+							for _, child in next(cheat.list:GetChildren()) do
 								if child:IsA("TextButton") then
 									child:Destroy()
 								end
