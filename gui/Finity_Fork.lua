@@ -643,7 +643,6 @@ function finity.new(isdark, gprojectName, thinMenu)
 							local lightertheme = Color3.fromRGB((theme.checkbox_outer.R * 255) + 20, (theme.checkbox_outer.G * 255) + 20, (theme.checkbox_outer.B * 255) + 20)
 							finity.gs["TweenService"]:Create(cheat.outerbox, TweenInfo.new(0.2), {ImageColor3 = lightertheme}):Play()
 						end)
-
 						cheat.checkboxbutton.MouseLeave:Connect(function()
 							if not cheat.value then
 								finity.gs["TweenService"]:Create(cheat.outerbox, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_outer}):Play()
@@ -651,7 +650,6 @@ function finity.new(isdark, gprojectName, thinMenu)
 								finity.gs["TweenService"]:Create(cheat.outerbox, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_checked}):Play()
 							end
 						end)
-
 						cheat.checkboxbutton.MouseButton1Down:Connect(function()
 							if cheat.value then
 								finity.gs["TweenService"]:Create(cheat.checkboxbutton, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_outer}):Play()
@@ -659,7 +657,6 @@ function finity.new(isdark, gprojectName, thinMenu)
 								finity.gs["TweenService"]:Create(cheat.checkboxbutton, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_checked}):Play()
 							end
 						end)
-
 						cheat.checkboxbutton.MouseButton1Up:Connect(function()
 							cheat.value = not cheat.value
 
@@ -679,14 +676,24 @@ function finity.new(isdark, gprojectName, thinMenu)
 							end
 						end)
 
-						function cheat:SetValue(bool)
-							cheat.value = bool
+						function cheat:SetValue(value)
+                            cheat.value = value
 
-                            if cheat.value == true then
+                            if cheat.value then
                                 finity.gs["TweenService"]:Create(cheat.outerbox, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_checked}):Play()
+								finity.gs["TweenService"]:Create(cheat.checkboxbutton, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_checked}):Play()
                             else
                                 finity.gs["TweenService"]:Create(cheat.outerbox, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_outer}):Play()
-                                finity.gs["TweenService"]:Create(cheat.checkboxbutton, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_inner}):Play()
+								finity.gs["TweenService"]:Create(cheat.checkboxbutton, TweenInfo.new(0.2), {ImageColor3 = theme.checkbox_inner}):Play()
+                            end
+							
+                            if callback then
+                                local s, e = pcall(function()
+                                    callback(cheat.value)
+                                end)
+                                if not s then 
+                                    warn("error: "..e) 
+                                end
                             end
 						end
 
@@ -894,13 +901,13 @@ function finity.new(isdark, gprojectName, thinMenu)
 								cheat.fadelist()
 							end	
 							
-							for _, child in next(cheat.list:GetChildren()) do
+							for _, child in pairs(cheat.list:GetChildren()) do
 								if child:IsA("TextButton") then
 									child:Destroy()
 								end
 							end
 							
-							for _, value in next, options do
+							for _, value in pairs(options) do
 								local button = finity:Create("TextButton", {
 									BackgroundColor3 = Color3.new(1, 1, 1),
 									BackgroundTransparency = 1,
@@ -949,7 +956,7 @@ function finity.new(isdark, gprojectName, thinMenu)
 							cheat.dropped = not cheat.dropped
 
 							if cheat.dropped then
-								for _, button in next, cheat.list:GetChildren() do
+								for _, button in pairs(cheat.list:GetChildren()) do
 									if button:IsA("TextButton") then
 										finity.gs["TweenService"]:Create(button, TweenInfo.new(0.2), {TextTransparency = 0}):Play()
 									end
@@ -957,7 +964,7 @@ function finity.new(isdark, gprojectName, thinMenu)
 
 								finity.gs["TweenService"]:Create(cheat.list, TweenInfo.new(0.2), {Size = UDim2.new(1, 0, 0, math.clamp(cheat.list["UIListLayout"].AbsoluteContentSize.Y, 0, 150)), Position = UDim2.new(0, 0, 1, 0), ScrollBarImageTransparency = 0, BackgroundTransparency = 0.5}):Play()
 							else
-								for _, button in next, cheat.list:GetChildren() do
+								for _, button in pairs(cheat.list:GetChildren()) do
 									if button:IsA("TextButton") then
 										finity.gs["TweenService"]:Create(button, TweenInfo.new(0.2), {TextTransparency = 1}):Play()
 									end
@@ -981,7 +988,7 @@ function finity.new(isdark, gprojectName, thinMenu)
 						
 						function cheat:RemoveOption(value)
 							local removed = false
-							for index, option in next, options do
+							for index, option in pairs(options) do
 								if option == value then
 									table.remove(options, index)
 									removed = true
@@ -1017,6 +1024,10 @@ function finity.new(isdark, gprojectName, thinMenu)
 
 								if not s then warn("error: ".. e) end
 							end
+						end
+
+						function cheat:RefreshOptions()
+							refreshOptions()
 						end
 
 						cheat.selected.Parent = cheat.dropdown
@@ -1058,17 +1069,14 @@ function finity.new(isdark, gprojectName, thinMenu)
 						cheat.background.MouseEnter:Connect(function()
 							finity.gs["TweenService"]:Create(cheat.textbox, TweenInfo.new(0.1), {TextColor3 = theme.textbox_text_hover}):Play()
 						end)
-
 						cheat.background.MouseLeave:Connect(function()
 							finity.gs["TweenService"]:Create(cheat.textbox, TweenInfo.new(0.1), {TextColor3 = theme.textbox_text}):Play()
 						end)
-
 						cheat.textbox.Focused:Connect(function()
 							typing = true
 
 							finity.gs["TweenService"]:Create(cheat.background, TweenInfo.new(0.2), {ImageColor3 = theme.textbox_background_hover}):Play()
 						end)
-
 						cheat.textbox.FocusLost:Connect(function()
 							typing = false
 
@@ -1085,7 +1093,6 @@ function finity.new(isdark, gprojectName, thinMenu)
 								if not s then warn("error: "..e) end
                             end
                         end)
-
                         function cheat:SetValue(value)
                             cheat.value = tostring(value)
                             cheat.textbox.Text = tostring(value)
@@ -1499,10 +1506,6 @@ function finity.new(isdark, gprojectName, thinMenu)
 					end
 				end
 
-				function cheat:ChangeText(text)
-					cheat.label.Text = tostring(text)
-				end
-
 				cheat.frame.Parent = sector.container
 				cheat.label.Parent = cheat.frame
 				cheat.container.Parent = cheat.frame
@@ -1540,5 +1543,3 @@ function finity.new(isdark, gprojectName, thinMenu)
 
 	return self2, finityData
 end
-
-return finity
