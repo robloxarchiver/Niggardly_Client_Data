@@ -1026,6 +1026,10 @@ function finity.new(isdark, gprojectName, thinMenu)
 							end
 						end
 
+						function cheat:GetOptions()
+							return options
+						end
+
 						function cheat:RefreshOptions()
 							refreshOptions()
 						end
