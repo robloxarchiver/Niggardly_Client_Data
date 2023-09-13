@@ -1,0 +1,12 @@
+local client = {
+    default_key_code = Enum.Keycode.Minus,
+    motd = "What comes up, must come down!",
+    version = "0.0.6",
+    version_title = "The Rewrite Update"
+}
+
+--[[
+
+    If you see this I just leaked the next update. :3
+
+]]
