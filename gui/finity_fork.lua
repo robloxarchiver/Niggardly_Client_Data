@@ -7,7 +7,7 @@
     |_|    |_____|_| \_|_____|  |_|     |_|   
     
     Version:
-        0.2.0
+        0.2.1
     Date: 
         April 21th, 2020
     Author: 
@@ -1222,7 +1222,7 @@ function finity.new(isdark, gprojectName, thinMenu)
 
                             cheat.value = math.floor((minimum + (maximum - minimum) * percent) * 100) / 100
                             if precise then
-                                cheat.numbervalue.Text = math.ceil(tostring(cheat.value)) .. suffix
+                                cheat.numbervalue.Text = tostring(math.ceil(cheat.value)) .. suffix
                             else
                                 cheat.numbervalue.Text = tostring(cheat.value) .. suffix
                             end
@@ -1255,7 +1255,7 @@ function finity.new(isdark, gprojectName, thinMenu)
 
                                 cheat.value = math.floor((minimum + (maximum - minimum) * percent) * 100) / 100
                                 if precise then
-                                    cheat.numbervalue.Text = math.ceil(tostring(cheat.value)) .. suffix
+                                    cheat.numbervalue.Text = tostring(math.ceil(cheat.value)) .. suffix
                                 else
                                     cheat.numbervalue.Text = tostring(cheat.value) .. suffix
                                 end
