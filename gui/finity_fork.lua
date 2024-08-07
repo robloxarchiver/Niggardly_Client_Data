@@ -6,21 +6,17 @@
 	| |     _| |_| |\  |_| |_   | |     | |   
 	|_|    |_____|_| \_|_____|  |_|     |_|   
 	
-	Source:
-		https://d3to-finity.000webhostapp.com/files/source-0.1.2.txt
-	Version:
-	 0.1.5
-	Date: 
-		April 21th, 2020
-	Author: 
-		detourious @ v3rmillion.netf
-				
-	Docs:
-		https://detourious.gitbook.io/project-finity/
+    Version:
+        0.2.0
+    Date: 
+        April 21th, 2020
+    Author: 
+        detourious @ v3rmillion.netf		
+    Docs:
+        https://detourious.gitbook.io/project-finity/
 --]]
 
-
-getgenv().finity = {}
+local finity = {}
 finity.gs = {}
 
 pcall(function()
@@ -31,19 +27,19 @@ end)
 
 finity.theme = { -- light // purge theme // unused now
 	main_container = Color3.fromRGB(25,25,25),
-	separator_color = Color3.fromRGB(0, 255, 255),
+	separator_color = Color3.fromRGB(255, 0, 0),
 
 	text_color = Color3.fromRGB(251,248,253), -- softer color
 
 	category_button_background = Color3.fromRGB(21,23,30),
 	category_button_border = Color3.fromRGB(0,0,0),
 
-	checkbox_checked = Color3.fromRGB(0, 255, 255),
+	checkbox_checked = Color3.fromRGB(255, 0, 0),
 	checkbox_outer = Color3.fromRGB(0,0,0),
 	checkbox_inner = Color3.fromRGB(32,33,42),
 
-	slider_color = Color3.fromRGB(0, 255, 255),
-	slider_color_sliding = Color3.fromRGB(0, 255, 255),
+	slider_color = Color3.fromRGB(255, 0, 0),
+	slider_color_sliding = Color3.fromRGB(255, 0, 0),
 	slider_background = Color3.fromRGB(42,33,42),
 	slider_text = Color3.fromRGB(251,248,253),
 	
@@ -111,7 +107,6 @@ setmetatable(finity.gs, {
 	end
 })
 
-
 local mouse = finity.gs["Players"].LocalPlayer:GetMouse()
 
 function finity:Create(class, properties)
@@ -165,6 +160,8 @@ function finity.new(isdark, gprojectName, thinMenu)
 	finityData = {
 		UpConnection = nil,
 		ToggleKey = Enum.KeyCode.Home,
+        ExitKey = Enum.KeyCode.Delete,
+        ExitKeyConnection = nil
 	}
 
 	self2.ChangeToggleKey = function(NewKey)
@@ -193,6 +190,24 @@ function finity.new(isdark, gprojectName, thinMenu)
 			end
 		end)
 	end
+
+    self2.GetToggleKey = function()
+        return finityData.ToggleKey
+    end
+
+    self2.ChangeExitKey = function(NewKey)
+        finityData.ExitKey = NewKey
+
+        if (finityData.ExitKeyConnection) then
+            finityData.ExitKeyConnection:Disconnect()
+        end
+
+        finityData.ExitKeyConnection = finity.gs["UserInputService"].InputEnded:Connect(function(Input)
+            if (Input.KeyCode == finityData.ExitKey) and (not typing) then
+                self2.userinterface:Destroy()
+            end
+        end)
+    end
 	
 	self2.ChangeBackgroundImage = function(ImageID, Transparency)
 		self2.container.Image = ImageID
@@ -215,6 +230,12 @@ function finity.new(isdark, gprojectName, thinMenu)
 			end
 		end
 	end)
+
+    finityData.ExitKeyConnection = finity.gs["UserInputService"].InputEnded:Connect(function(Input)
+        if (Input.KeyCode == finityData.ExitKey) and (not typing) then
+            self2.userinterface:Destroy()
+        end
+    end)
 
 	self2.userinterface = self:Create("ScreenGui", {
 		Name = game:GetService("HttpService"):GenerateGUID(false),
@@ -285,7 +306,7 @@ function finity.new(isdark, gprojectName, thinMenu)
 		Size = UDim2.new(1, -30, 0, 30),
 		Position = UDim2.new(0, 30, 0, 0),
 		Text = "Press '".. string.sub(tostring(self.ToggleKey), 14) .."' to hide this menu",
-		Font = Enum.Font.GothamSemibold,
+		Font = Enum.Font.GothamMedium,
 		TextSize = 13,
 		TextXAlignment = Enum.TextXAlignment.Left,
 		BackgroundTransparency = 1,
@@ -360,7 +381,7 @@ function finity.new(isdark, gprojectName, thinMenu)
 			Size = UDim2.new(1, -4, 0, 25),
 			ZIndex = 2,
 			AutoButtonColor = false,
-			Font = Enum.Font.GothamSemibold,
+			Font = Enum.Font.GothamMedium,
 			Text = name,
 			TextColor3 = theme.text_color,
 			TextSize = 14
@@ -530,7 +551,7 @@ function finity.new(isdark, gprojectName, thinMenu)
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, -5, 0, 25),
 				ZIndex = 2,
-				Font = Enum.Font.GothamSemibold,
+				Font = Enum.Font.GothamMedium,
 				TextColor3 = theme.text_color,
 				TextSize = 14,
 				TextXAlignment = Enum.TextXAlignment.Left,
@@ -1545,5 +1566,7 @@ function finity.new(isdark, gprojectName, thinMenu)
 	self2.topbar.Parent = self2.container
 	self2.tip.Parent = self2.topbar
 
-	return self2, finityData
+	return self2
 end
+
+return finity
